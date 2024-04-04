@@ -10,8 +10,8 @@ namespace SpotifyLite.Domain.Models.Notificacao
         public string Titulo { get; set; }
         public TipoNotificacao TipoNotificacao { get; set; }
 
-        public Usuario UsuarioDestino { get; set; }
-        public Usuario? UsuarioRemetente { get; set; }
+        public virtual Usuario UsuarioDestino { get; set; }
+        public virtual Usuario? UsuarioRemetente { get; set; }
 
 
         public Notificacao CriarNotificacao(string titulo, string mensagem, TipoNotificacao tipoNotificacao, Usuario destino, Usuario remetente = null)

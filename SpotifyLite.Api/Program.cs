@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using SpotifyLite.Application;
-using SpotifyLite.Repository;
+using SpotifyLite.Application.Profile;
+using SpotifyLite.Application.Service;
+using SpotifyLite.Domain.Repository;
+using SpotifyLite.Repository.Context;
+using SpotifyLite.Repository.Repository;
 
 namespace SpotifyLite.Api
 {
@@ -11,12 +14,26 @@ namespace SpotifyLite.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
 
-            builder.Services
-                   .RegisterApplication()
-                   .RegisterRepository(builder.Configuration.GetConnectionString("SpotifyLite"));
+            //builder.Services
+            //       .RegisterApplication()
+            //       .RegisterRepository(builder.Configuration.GetConnectionString("SpotifyLite"));
+            builder.Services.AddDbContext<SpotifyLiteContext>(c =>
+            {
+                c.UseLazyLoadingProxies()
+                 .UseSqlServer(builder.Configuration.GetConnectionString("SpotifyConnection"));
+            });
+
+            builder.Services.AddAutoMapper(typeof(Profile).Assembly);
+
+            //Repositories
+            builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+
+            //Services
+            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+            builder.Services.AddScoped<IPlaylistService, PlaylistService>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

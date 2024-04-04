@@ -8,6 +8,6 @@ namespace SpotifyLite.Domain.Models.Conta.Agreggates
         public bool Ativo { get; set; }
         public DateTime DtAtivacao { get; set; }
 
-        public Plano Plano { get; set; }
+        public virtual Plano Plano { get; set; }
     }
 }

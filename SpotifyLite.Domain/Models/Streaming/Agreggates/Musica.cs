@@ -9,9 +9,9 @@ namespace SpotifyLite.Domain.Models.Streaming.Agreggates
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
-
         public Duracao Duracao { get; set; }
-        public List<Playlist> Playlists { get; set; } = new List<Playlist>();
+
+        public virtual List<Playlist> Playlists { get; set; } = new List<Playlist>();
 
         public Musica CriarMusica(string nome, Duracao duracao)
         {

@@ -15,7 +15,7 @@ namespace SpotifyLite.Domain.Models.Streaming.Agreggates
         public string Descricao { get; set; }
         public string Backdrop { get; set; }
 
-        public List<Album> Albums { get; set; } = new List<Album>();
+        public virtual List<Album> Albums { get; set; } = new List<Album>();
 
         public void AdicionarAlbum(Album album) =>
             Albums.Add(album);
