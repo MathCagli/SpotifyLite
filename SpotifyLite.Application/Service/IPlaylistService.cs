@@ -4,10 +4,10 @@ namespace SpotifyLite.Application.Service
 {
     public interface IPlaylistService
     {
-        Task<PlaylistOutputDto> Criar(PlaylistInputDto dto);
-        Task<List<PlaylistOutputDto>> ListarTodos();
-        Task<PlaylistOutputDto> BuscarPorID(string id);
-        Task<PlaylistOutputDto> Atualizar(PlaylistOutputDto dto);
+        Task<PlaylistDTO> Criar(PlaylistDTO dto);
+        Task<List<PlaylistDTO>> ListarTodos();
+        Task<PlaylistDTO> BuscarPorID(string id);
+        Task<PlaylistDTO> Atualizar(PlaylistDTO dto);
         Task<string> Remover(string id);
     }
 }

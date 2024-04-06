@@ -5,43 +5,43 @@ namespace SpotifyLite.Tests.Domain
 {
     public class MusicaDomainTest
     {
-        [Fact]
-        public void DeveCriarMusicaComSucesso()
-        {
-            var nome = "Música Teste";
-            Duracao duracao = new Duracao() { Valor = 10 };
+        //[Fact]
+        //public void DeveCriarMusicaComSucesso()
+        //{
+        //    var nome = "Música Teste";
+        //    Duracao duracao = new Duracao() { Valor = 10 };
 
-            Musica musica = new Musica();
-            musica.CriarMusica(nome, duracao);
+        //    Musica musica = new Musica();
+        //    musica.CriarMusica(nome, duracao);
 
-            Assert.True(musica.Nome == nome);
-            Assert.True(musica.Duracao == duracao);
-        }
+        //    Assert.True(musica.Nome == nome);
+        //    Assert.True(musica.Duracao == duracao);
+        //}
 
-        [Fact]
-        public void NaoDeveCriarMusicaSemNome()
-        {
-            var nome = "";
-            Duracao duracao = new Duracao() { Valor = 10 };
+        //[Fact]
+        //public void NaoDeveCriarMusicaSemNome()
+        //{
+        //    var nome = "";
+        //    Duracao duracao = new Duracao() { Valor = 10 };
 
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                Musica musica = new Musica();
-                musica.CriarMusica(nome, duracao);
-            });
-        }
+        //    Assert.Throws<ArgumentNullException>(() =>
+        //    {
+        //        Musica musica = new Musica();
+        //        musica.CriarMusica(nome, duracao);
+        //    });
+        //}
 
-        [Fact]
-        public void NaoDeveCriarMusicaSemDuracao()
-        {
-            var nome = "Música Teste";
-            Duracao duracao = new Duracao() { Valor = 0 };
+        //[Fact]
+        //public void NaoDeveCriarMusicaSemDuracao()
+        //{
+        //    var nome = "Música Teste";
+        //    Duracao duracao = new Duracao() { Valor = 0 };
 
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                Musica musica = new Musica();
-                musica.CriarMusica(nome, duracao);
-            });
-        }
+        //    Assert.Throws<ArgumentNullException>(() =>
+        //    {
+        //        Musica musica = new Musica();
+        //        musica.CriarMusica(nome, duracao);
+        //    });
+        //}
     }
 }

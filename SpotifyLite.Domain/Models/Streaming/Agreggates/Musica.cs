@@ -13,23 +13,23 @@ namespace SpotifyLite.Domain.Models.Streaming.Agreggates
 
         public virtual List<Playlist> Playlists { get; set; } = new List<Playlist>();
 
-        public Musica CriarMusica(string nome, Duracao duracao)
-        {
-            Nome = nome;
-            Duracao = duracao;
+        //public Musica CriarMusica(string nome, Duracao duracao)
+        //{
+        //    Nome = nome;
+        //    Duracao = duracao;
 
-            if (string.IsNullOrWhiteSpace(nome))
-                throw new ArgumentNullException("Informe o nome da música");
+        //    if (string.IsNullOrWhiteSpace(nome))
+        //        throw new ArgumentNullException("Informe o nome da música");
 
-            if (Duracao.Valor < 1)
-                throw new ArgumentNullException("Duração deve ser maior que zero");
+        //    if (Duracao.Valor < 1)
+        //        throw new ArgumentNullException("Duração deve ser maior que zero");
 
-            return new Musica()
-            {
-                Nome = nome,
-                Duracao = duracao
-            };
+        //    return new Musica()
+        //    {
+        //        Nome = nome,
+        //        Duracao = duracao
+        //    };
 
-        }
+        //}
     }
 }

@@ -14,4 +14,3 @@ namespace SpotifyLite.Domain.Models.Conta.Agreggates
 
     }
 }
-

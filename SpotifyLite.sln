@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyLite.CrossCutting", "SpotifyLite.CrossCutting\SpotifyLite.CrossCutting.csproj", "{CF498E75-9D8A-45BC-B37A-8F40E09FDBF2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyLite.Domain", "SpotifyLite.Domain\SpotifyLite.Domain.csproj", "{8EE96873-1E12-4DA1-B34B-23D9596CDF9D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyLite.Repository", "SpotifyLite.Repository\SpotifyLite.Repository.csproj", "{1884CB0C-1B03-4219-93BB-3FBAE08F883D}"
@@ -17,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyLite.Api", "SpotifyL
 		{ECF2FEF2-0FA7-411B-BCB2-5822501946FB} = {ECF2FEF2-0FA7-411B-BCB2-5822501946FB}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyLite.Tests", "SpotifyLite.Tests\SpotifyLite.Tests.csproj", "{AAE9A94C-4DAD-43DE-BB95-12372117A3D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyLite.Tests", "SpotifyLite.Tests\SpotifyLite.Tests.csproj", "{AAE9A94C-4DAD-43DE-BB95-12372117A3D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CF498E75-9D8A-45BC-B37A-8F40E09FDBF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF498E75-9D8A-45BC-B37A-8F40E09FDBF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF498E75-9D8A-45BC-B37A-8F40E09FDBF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF498E75-9D8A-45BC-B37A-8F40E09FDBF2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8EE96873-1E12-4DA1-B34B-23D9596CDF9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8EE96873-1E12-4DA1-B34B-23D9596CDF9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EE96873-1E12-4DA1-B34B-23D9596CDF9D}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,12 +1,4 @@
-﻿using SpotifyLite.Domain.Models.Conta.Agreggates;
-using SpotifyLite.Domain.Models.Core.ValueObject;
-using SpotifyLite.Domain.Models.Notificacao;
-using SpotifyLite.Domain.Models.Transacao.Agreggates;
-using SpotifyLite.Domain.Models.Transacao.ValueObject;
-using System.Numerics;
-using System.Text;
-
-namespace SpotifyLite.Domain.Models.Streaming.Agreggates
+﻿namespace SpotifyLite.Domain.Models.Streaming.Agreggates
 {
     public class Banda
     {
@@ -20,21 +12,21 @@ namespace SpotifyLite.Domain.Models.Streaming.Agreggates
         public void AdicionarAlbum(Album album) =>
             Albums.Add(album);
 
-        public Banda CriarBanda(string nome, string descricao, string backdrop)
-        {
-            Nome = nome;
-            Descricao = descricao;
-            Backdrop = backdrop;
+        //public Banda CriarBanda(string nome, string descricao, string backdrop)
+        //{
+        //    Nome = nome;
+        //    Descricao = descricao;
+        //    Backdrop = backdrop;
 
-            if (string.IsNullOrWhiteSpace(nome))
-                throw new ArgumentNullException("Informe o nome da Banda.");
+        //    if (string.IsNullOrWhiteSpace(nome))
+        //        throw new ArgumentNullException("Informe o nome da Banda.");
 
-            return new Banda()
-            {
-                Nome = nome,
-                Descricao = descricao,
-                Backdrop = backdrop
-            };
-        }
+        //    return new Banda()
+        //    {
+        //        Nome = nome,
+        //        Descricao = descricao,
+        //        Backdrop = backdrop
+        //    };
+        //}
     }
 }

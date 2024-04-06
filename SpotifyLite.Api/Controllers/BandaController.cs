@@ -1,83 +1,89 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SpotifyLite.Application.DTO;
+using SpotifyLite.Application.Service;
 
 namespace SpotifyLite.Api.Controllers
 {
-    public class BandaController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BandaController : ControllerBase
     {
-        // GET: BandaController
-        public ActionResult Index()
+        private BandaService _bandaService;
+
+        public BandaController(BandaService bandaService)
         {
-            return View();
+            _bandaService = bandaService;
         }
 
-        // GET: BandaController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public IActionResult GetBandas()
         {
-            return View();
+            var result = this._bandaService.Obter();
+
+            return Ok(result);
         }
 
-        // GET: BandaController/Create
-        public ActionResult Create()
+        [HttpGet("{id}")]
+        public IActionResult GetBandas(Guid id)
         {
-            return View();
+            var result = this._bandaService.Obter(id);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
 
-        // POST: BandaController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Criar([FromBody] BandaDTO dto)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            if (ModelState is { IsValid: false })
+                return BadRequest();
+
+            var result = this._bandaService.Criar(dto);
+
+            return Created($"/banda/{result.Id}", result);
         }
 
-        // GET: BandaController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpPost("{id}/albums")]
+        public IActionResult AssociarAlbum(AlbumDTO dto)
         {
-            return View();
+            if (ModelState is { IsValid: false })
+                return BadRequest();
+
+            var result = this._bandaService.AssociarAlbum(dto);
+
+            return Created($"/banda/{result.BandaId}/albums/{result.Id}", result);
+
         }
 
-        // POST: BandaController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+
+        [HttpGet("{idBanda}/albums/{id}")]
+        public IActionResult ObterAlbumPorId(Guid idBanda, Guid id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var result = this._bandaService.ObterAlbumPorId(idBanda, id);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+
         }
 
-        // GET: BandaController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet("{idBanda}/albums")]
+        public IActionResult ObterAlbuns(Guid idBanda)
         {
-            return View();
+            var result = this._bandaService.ObterAlbum(idBanda);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+
         }
 
-        // POST: BandaController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

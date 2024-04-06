@@ -1,6 +1,7 @@
 ﻿using SpotifyLite.Application.DTO;
 using SpotifyLite.Domain.Models;
 using SpotifyLite.Domain.Models.Conta.Agreggates;
+using SpotifyLite.Domain.Models.Transacao.Agreggates;
 
 namespace SpotifyLite.Application.Profile
 {
@@ -9,12 +10,21 @@ namespace SpotifyLite.Application.Profile
         public Profile()
         {
             // Playlist
-            CreateMap<Playlist, PlaylistInputDto>().ReverseMap();
-            CreateMap<Playlist, PlaylistOutputDto>().ReverseMap();
+            CreateMap<Playlist, PlaylistDTO>().ReverseMap();
 
             // Usuário
-            CreateMap<UsuarioInputDto, Usuario>().ReverseMap();
-            CreateMap<Usuario, UsuarioOutputDto>().ReverseMap();
+            CreateMap<Usuario, UsuarioDTO>().AfterMap((s, d) =>
+            {
+                var plano = s.Assinaturas?.FirstOrDefault(a => a.Ativo)?.Plano;
+                if (plano != null)
+                    d.PlanoId = plano.Id;
+                d.Senha = "xxxxxxxxx";
+            }).ReverseMap();
+
+            // Cartão
+            CreateMap<CartaoDTO, Cartao>()
+                .ForPath(x => x.Limite.Valor, m => m.MapFrom(f => f.Limite))
+                .ReverseMap();
         }
     }
 }

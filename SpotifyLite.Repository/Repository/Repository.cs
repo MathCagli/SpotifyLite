@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using SpotifyLite.CrossCutting.Repository;
 using SpotifyLite.Repository.Context;
+using SpotifyLite.Domain.Repositories;
 using System.Data;
 using System.Linq.Expressions;
 
-namespace SpotifyLite.Repository.Database
+namespace SpotifyLite.Repository.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
@@ -14,57 +14,67 @@ namespace SpotifyLite.Repository.Database
 
         public Repository(SpotifyLiteContext context)
         {
-            this.Context = context;
-            this.Query = Context.Set<T>();
+            Context = context;
+            Query = Context.Set<T>();
         }
 
         public async Task<IDbContextTransaction> CreateTransaction()
         {
-            return await this.Context.Database.BeginTransactionAsync();
+            return await Context.Database.BeginTransactionAsync();
         }
 
         public async Task<IDbContextTransaction> CreateTransaction(IsolationLevel isolation)
         {
-            return await this.Context.Database.BeginTransactionAsync(isolation);
+            return await Context.Database.BeginTransactionAsync(isolation);
         }
 
         public async Task Delete(T entity)
         {
-            this.Query.Remove(entity);
-            await this.Context.SaveChangesAsync();
+            Query.Remove(entity);
+            await Context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> FindAllByCriteria(Expression<Func<T, bool>> expression)
         {
-            return await this.Query.Where(expression).ToListAsync();
+            return await Query.Where(expression).ToListAsync();
         }
 
         public async Task<T> FindOneByCriteria(Expression<Func<T, bool>> expression)
         {
-            return await this.Query.FirstOrDefaultAsync(expression);
+            return await Query.FirstOrDefaultAsync(expression);
         }
 
-        public async Task<T> Get(string id)
+        public async Task<T> Get(Guid id)
         {
-            return await this.Query.FindAsync(new Guid(id));
+            return await Query.FindAsync(id);
         }
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return await this.Query.ToListAsync();
+            return await Query.ToListAsync();
         }
 
         public async Task Save(T entity)
         {
-            this.Query.Add(entity);
-            this.Context.SaveChanges();
+            Query.Add(entity);
+            Context.SaveChanges();
         }
 
         public async Task Update(T entity)
         {
-            this.Query.Update(entity);
-            await this.Context.SaveChangesAsync();
+            Query.Update(entity);
+            await Context.SaveChangesAsync();
 
+        }
+
+        public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
+        {
+            return Context.Set<T>().Where(expression);
+        }
+
+        public bool Exists(Expression<Func<T, bool>> expression)
+        {
+            return Find(expression).Any();
         }
     }
 }

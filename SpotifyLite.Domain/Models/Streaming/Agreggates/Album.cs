@@ -10,20 +10,20 @@
 
         public void AdicionarMusica(Musica musica) =>
             Musica.Add(musica);
-        public void AdicionarMusica(List<Musica> musica) =>
-            Musica.AddRange(musica);
+        //public void AdicionarMusica(List<Musica> musica) =>
+        //    Musica.AddRange(musica);
 
-        public Album CriarAlbum(string nome)
-        {
-            Nome = nome;
+        //public Album CriarAlbum(string nome)
+        //{
+        //    Nome = nome;
 
-            if (string.IsNullOrWhiteSpace(nome))
-                throw new ArgumentNullException("Informe o nome da Album.");
+        //    if (string.IsNullOrWhiteSpace(nome))
+        //        throw new ArgumentNullException("Informe o nome da Album.");
 
-            return new Album()
-            {
-                Nome = nome
-            };
-        }
+        //    return new Album()
+        //    {
+        //        Nome = nome
+        //    };
+        //}
     }
 }

@@ -15,27 +15,24 @@ namespace SpotifyLite.Api
 
             // Add services to the container.
             builder.Services.AddControllers();
-
-            //builder.Services
-            //       .RegisterApplication()
-            //       .RegisterRepository(builder.Configuration.GetConnectionString("SpotifyLite"));
+            builder.Services.AddAutoMapper(typeof(Profile).Assembly);
             builder.Services.AddDbContext<SpotifyLiteContext>(c =>
             {
                 c.UseLazyLoadingProxies()
                  .UseSqlServer(builder.Configuration.GetConnectionString("SpotifyConnection"));
             });
 
-            builder.Services.AddAutoMapper(typeof(Profile).Assembly);
-
-            //Repositories
-            builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
-
-            //Services
-            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+            // Services
+            builder.Services.AddScoped<IBandaService, BandaService>();
             builder.Services.AddScoped<IPlaylistService, PlaylistService>();
+            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // Repositories
+            builder.Services.AddScoped<IBandaRepository, BandaRepository>();
+            builder.Services.AddScoped<IPlanoRepository, PlanoRepository>();
+            builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+            builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -45,7 +42,6 @@ namespace SpotifyLite.Api
             app.UseSwagger();
             app.UseSwaggerUI();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SpotifyLite v1"));
-            //app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
             app.Run();

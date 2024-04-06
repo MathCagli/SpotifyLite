@@ -2,22 +2,29 @@
 
 namespace SpotifyLite.Application.DTO
 {
-    public record UsuarioInputDto(
-        [Required(ErrorMessage = "Nome é obrigatório!")] string Nome, 
-        [Required(ErrorMessage = "Data de nascimento é obrigatória!")] DateTime DataNascimento, 
-        [Required(ErrorMessage = "Email é obrigatório!")] string Email, 
-        [Required(ErrorMessage = "Senha é obrigatória!")] string Senha, 
-        [Required(ErrorMessage = "Sexo é obrigatório!")] string Sexo, 
-        List<PlaylistInputDto> Playlists
-        );
+    public class UsuarioDTO
+    {
 
-    public record UsuarioOutputDto(
-        Guid Id, 
-        string Nome, 
-        DateTime DataNascimento, 
-        string Email, 
-        string Senha, 
-        string Sexo, 
-        List<PlaylistOutputDto> Playlists
-        );
+        public Guid Id { get; set; }
+
+        [Required]
+        public string Nome { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        public string Senha { get; set; }
+
+        [Required]
+        public DateTime DtNascimento { get; set; }
+
+        public Guid PlanoId { get; set; }
+
+
+        [Required]
+        public CartaoDTO Cartao { get; set; }
+
+    }
 }

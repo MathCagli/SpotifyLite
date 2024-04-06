@@ -17,35 +17,35 @@ namespace SpotifyLite.Application.Service
             this.mapper = mapper;
         }
 
-        public async Task<PlaylistOutputDto> Criar(PlaylistInputDto dto)
+        public async Task<PlaylistDTO> Criar(PlaylistDTO dto)
         {
             var playlist = this.mapper.Map<Playlist>(dto);
             await this.playlistRepository.Save(playlist);
-            return this.mapper.Map<PlaylistOutputDto>(playlist);
+            return this.mapper.Map<PlaylistDTO>(playlist);
         }
 
-        public async Task<List<PlaylistOutputDto>> ListarTodos()
+        public async Task<List<PlaylistDTO>> ListarTodos()
         {
             var playlist = await this.playlistRepository.GetAll();
-            return this.mapper.Map<List<PlaylistOutputDto>>(playlist);
+            return this.mapper.Map<List<PlaylistDTO>>(playlist);
         }
 
-        public async Task<PlaylistOutputDto> BuscarPorID(string id)
+        public async Task<PlaylistDTO> BuscarPorID(string id)
         {
-            var playlist = await this.playlistRepository.Get(id);
-            return this.mapper.Map<PlaylistOutputDto>(playlist);
+            var playlist = await this.playlistRepository.Get(new Guid(id));
+            return this.mapper.Map<PlaylistDTO>(playlist);
         }
 
-        public async Task<PlaylistOutputDto> Atualizar(PlaylistOutputDto dto)
+        public async Task<PlaylistDTO> Atualizar(PlaylistDTO dto)
         {
             var playlist = this.mapper.Map<Playlist>(dto);
             await this.playlistRepository.Update(playlist);
-            return this.mapper.Map<PlaylistOutputDto>(playlist);
+            return this.mapper.Map<PlaylistDTO>(playlist);
         }
 
         public async Task<string> Remover(string id)
         {
-            var playlist = await this.playlistRepository.Get(id);
+            var playlist = await this.playlistRepository.Get(new Guid(id));
             await this.playlistRepository.Delete(playlist);
             return id;
         }

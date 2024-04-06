@@ -41,8 +41,6 @@ namespace SpotifyLite.Domain.Models.Conta.Agreggates
 
             //Criar a playlist padrão do usuario
             CriarPlaylist(nome: NOME_PLAYLIST, publica: false);
-
-
         }
 
         public void CriarPlaylist(string nome, bool publica = true)
@@ -90,11 +88,8 @@ namespace SpotifyLite.Domain.Models.Conta.Agreggates
         private string CriptografarSenha(string senhaAberta)
         {
             SHA256 criptoProvider = SHA256.Create();
-
             byte[] btexto = Encoding.UTF8.GetBytes(senhaAberta);
-
             var criptoResult = criptoProvider.ComputeHash(btexto);
-
             return Convert.ToHexString(criptoResult);
         }
     }

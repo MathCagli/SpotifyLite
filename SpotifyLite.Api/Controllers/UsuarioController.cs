@@ -16,8 +16,11 @@ namespace SpotifyLite.Api.Controllers
         }
 
         [HttpPost("Criar")]
-        public async Task<IActionResult> Criar(UsuarioInputDto dto)
+        public async Task<IActionResult> Criar(UsuarioDTO dto)
         {
+            if (ModelState is { IsValid: false })
+                return BadRequest();
+
             var result = await this.service.Criar(dto);
             return Created($"{result.Id}", result);
         }
@@ -35,7 +38,7 @@ namespace SpotifyLite.Api.Controllers
         }
 
         [HttpPut("Atualizar")]
-        public async Task<IActionResult> Atualizar(UsuarioOutputDto dto)
+        public async Task<IActionResult> Atualizar(UsuarioDTO dto)
         {
             var result = await this.service.Atualizar(dto);
             return Ok(result);
