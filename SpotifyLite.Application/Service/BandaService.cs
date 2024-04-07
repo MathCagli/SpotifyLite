@@ -26,14 +26,19 @@ namespace SpotifyLite.Application.Service
 
         public BandaDTO Obter(Guid id)
         {
-            var banda = this.bandaRepository.Get(id);
+            var banda = this.bandaRepository.Get(id).Result;
             return this.mapper.Map<BandaDTO>(banda);
         }
 
         public IEnumerable<BandaDTO> Obter()
         {
-            var banda = this.bandaRepository.GetAll();
-            return this.mapper.Map<IEnumerable<BandaDTO>>(banda);
+            var lista = this.bandaRepository.GetAll().Result;
+            List<BandaDTO> listaDTO = new List<BandaDTO>();
+            foreach (Banda i in lista)
+            {
+                listaDTO.Add(this.mapper.Map<BandaDTO>(i));
+            }
+            return listaDTO;
         }
 
         public AlbumDTO AssociarAlbum(AlbumDTO dto)

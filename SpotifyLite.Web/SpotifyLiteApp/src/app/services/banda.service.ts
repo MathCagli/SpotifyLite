@@ -15,14 +15,14 @@ export class BandaService {
   constructor(private httpClient: HttpClient) { }
 
   public getBanda() : Observable<Banda[]> {
-     return this.httpClient.get<Banda[]>(this.url);
+     return this.httpClient.get<Banda[]>(`${this.url}/ListarTodos`);
   }
 
   public getBandaPorId(id: string) : Observable<Banda> {
-    return this.httpClient.get<Banda>(`${this.url}/${id}`);
+    return this.httpClient.get<Banda>(`${this.url}/ObterPorId/${id}`);
   }
 
   public getAlbunsBanda(id: string) : Observable<Album[]> {
-    return this.httpClient.get<Album[]>(`${this.url}/${id}/albums`);
+    return this.httpClient.get<Album[]>(`${this.url}/ListarAlbuns/${id}/albums`);
   }
 }

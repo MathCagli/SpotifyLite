@@ -9,26 +9,25 @@ namespace SpotifyLite.Api.Controllers
     [ApiController]
     public class BandaController : ControllerBase
     {
-        private BandaService _bandaService;
+        private readonly IBandaService service;
 
-        public BandaController(BandaService bandaService)
+        public BandaController(IBandaService service)
         {
-            _bandaService = bandaService;
+            this.service = service;
         }
 
         [HttpGet("ListarTodos")]
         public IActionResult GetBandas()
         {
-            var result = this._bandaService.Obter();
+            var result = this.service.Obter();
 
             return Ok(result);
         }
 
-        
         [HttpGet("ObterPorId/{id}")]
         public IActionResult GetBandas(Guid id)
         {
-            var result = this._bandaService.Obter(id);
+            var result = this.service.Obter(id);
 
             if (result == null)
             {
@@ -44,7 +43,7 @@ namespace SpotifyLite.Api.Controllers
             if (ModelState is { IsValid: false })
                 return BadRequest();
 
-            var result = this._bandaService.Criar(dto);
+            var result = this.service.Criar(dto);
 
             return Created($"/banda/{result.Id}", result);
         }
@@ -55,7 +54,7 @@ namespace SpotifyLite.Api.Controllers
             if (ModelState is { IsValid: false })
                 return BadRequest();
 
-            var result = this._bandaService.AssociarAlbum(dto);
+            var result = this.service.AssociarAlbum(dto);
 
             return Created($"/banda/{result.BandaId}/albums/{result.Id}", result);
 
@@ -64,7 +63,7 @@ namespace SpotifyLite.Api.Controllers
         [HttpGet("ObterAlbumPorId/{idBanda}/albums/{id}")]
         public IActionResult ObterAlbumPorId(Guid idBanda, Guid id)
         {
-            var result = this._bandaService.ObterAlbumPorId(idBanda, id);
+            var result = this.service.ObterAlbumPorId(idBanda, id);
 
             if (result == null)
                 return NotFound();
@@ -76,7 +75,7 @@ namespace SpotifyLite.Api.Controllers
         [HttpGet("ListarAlbuns/{idBanda}/albums")]
         public IActionResult ObterAlbuns(Guid idBanda)
         {
-            var result = this._bandaService.ObterAlbum(idBanda);
+            var result = this.service.ObterAlbum(idBanda);
 
             if (result == null)
                 return NotFound();

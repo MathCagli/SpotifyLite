@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SpotifyLite.Application.DTO;
 using SpotifyLite.Application.Service;
@@ -51,6 +52,7 @@ namespace SpotifyLite.Api.Controllers
             return Ok(await this.service.Remover(id));
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest login)
         {
