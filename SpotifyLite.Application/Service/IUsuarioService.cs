@@ -9,5 +9,6 @@ namespace SpotifyLite.Application.Service
         Task<UsuarioDTO> BuscarPorID(string id);
         Task<UsuarioDTO> Atualizar(UsuarioDTO dto);
         Task<string> Remover(string id);
+        UsuarioDTO Autenticar(string email, string senha);
     }
 }

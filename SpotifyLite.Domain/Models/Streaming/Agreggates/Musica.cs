@@ -11,7 +11,7 @@ namespace SpotifyLite.Domain.Models.Streaming.Agreggates
         public string Nome { get; set; }
         public Duracao Duracao { get; set; }
 
-        public virtual List<Playlist> Playlists { get; set; } = new List<Playlist>();
+        public virtual IList<Playlist> Playlists { get; set; } = new List<Playlist>();
 
         //public Musica CriarMusica(string nome, Duracao duracao)
         //{

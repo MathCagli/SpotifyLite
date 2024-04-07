@@ -10,7 +10,7 @@ namespace SpotifyLite.Domain.Models.Conta.Agreggates
         public DateTime DtCriacao { get; set; }
 
         public virtual Usuario Usuario { get; set; }
-        public virtual List<Musica> Musicas { get; set; }
+        public virtual IList<Musica> Musicas { get; set; }
 
     }
 }

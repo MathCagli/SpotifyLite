@@ -13,7 +13,7 @@ namespace SpotifyLite.Domain.Models.Transacao.Agreggates
         public string Numero { get; set; }
 
         public Monetario Limite { get; set; }
-        public virtual List<Transacao> Transacoes { get; set; } = new List<Transacao>();
+        public virtual IList<Transacao> Transacoes { get; set; } = new List<Transacao>();
 
 
         public void CriarTransacao(Merchant merchant, Monetario valor, string Descricao = "")

@@ -7,7 +7,7 @@
         public string Descricao { get; set; }
         public string Backdrop { get; set; }
 
-        public virtual List<Album> Albums { get; set; } = new List<Album>();
+        public virtual IList<Album> Albums { get; set; } = new List<Album>();
 
         public void AdicionarAlbum(Album album) =>
             Albums.Add(album);

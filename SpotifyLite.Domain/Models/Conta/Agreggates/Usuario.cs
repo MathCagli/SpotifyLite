@@ -18,10 +18,10 @@ namespace SpotifyLite.Domain.Models.Conta.Agreggates
         public string Senha { get; set; }
         public DateTime DtNascimento { get; set; }
 
-        public virtual List<Cartao> Cartoes { get; set; } = new List<Cartao>();
-        public virtual List<Assinatura> Assinaturas { get; set; } = new List<Assinatura>();
-        public virtual List<Playlist> Playlists { get; set; } = new List<Playlist>();
-        public virtual List<Notificacao.Notificacao> Notificacoes { get; set; } = new List<Notificacao.Notificacao>();
+        public virtual IList<Cartao> Cartoes { get; set; } = new List<Cartao>();
+        public virtual IList<Assinatura> Assinaturas { get; set; } = new List<Assinatura>();
+        public virtual IList<Playlist> Playlists { get; set; } = new List<Playlist>();
+        public virtual IList<Notificacao.Notificacao> Notificacoes { get; set; } = new List<Notificacao.Notificacao>();
 
 
         public void CriarConta(string nome, string email, string senha, DateTime dtNascimento, Plano plano, Cartao cartao)

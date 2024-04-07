@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SpotifyLite.Application.DTO;
 using SpotifyLite.Domain.Models.Conta.Agreggates;
+using SpotifyLite.Domain.Models.Core.Extension;
 using SpotifyLite.Domain.Models.Streaming.Agreggates;
 using SpotifyLite.Domain.Models.Transacao.Agreggates;
 using SpotifyLite.Domain.Repository;
@@ -66,6 +67,13 @@ namespace SpotifyLite.Application.Service
             var usuario = await this.usuarioRepository.Get(new Guid(id));
             await this.usuarioRepository.Delete(usuario);
             return id;
+        }
+
+        public UsuarioDTO Autenticar(String email, String senha)
+        {
+            var usuario = this.usuarioRepository.Find(x => x.Email == email && x.Senha == senha.HashSHA256()).FirstOrDefault();
+            var result = this.mapper.Map<UsuarioDTO>(usuario);
+            return result;
         }
     }
 }

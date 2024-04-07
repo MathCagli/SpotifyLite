@@ -1,6 +1,7 @@
 ﻿using SpotifyLite.Application.DTO;
 using SpotifyLite.Domain.Models;
 using SpotifyLite.Domain.Models.Conta.Agreggates;
+using SpotifyLite.Domain.Models.Streaming.Agreggates;
 using SpotifyLite.Domain.Models.Transacao.Agreggates;
 
 namespace SpotifyLite.Application.Profile
@@ -9,6 +10,9 @@ namespace SpotifyLite.Application.Profile
     {
         public Profile()
         {
+            // Banda
+            CreateMap<Banda, BandaDTO>().ReverseMap();
+
             // Playlist
             CreateMap<Playlist, PlaylistDTO>().ReverseMap();
 

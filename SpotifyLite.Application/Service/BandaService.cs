@@ -47,9 +47,9 @@ namespace SpotifyLite.Application.Service
 
             var novoAlbum = this.AlbumDtoParaAlbum(dto);
 
-            //banda.AdicionarAlbum(novoAlbum);
+            banda.Result.AdicionarAlbum(novoAlbum);
 
-            //this.bandaRepository.Update(banda);
+            this.bandaRepository.Update(banda.Result);
             var result = this.AlbumParaAlbumDto(novoAlbum);
 
             return result;
@@ -65,12 +65,9 @@ namespace SpotifyLite.Application.Service
                 throw new Exception("Banda não encontrada");
             }
 
-            //var album = (from x in banda.Albums
-            // select x
-            //).FirstOrDefault(x => x.Id == id);
-            var album = new Album();
+            var album = (from x in banda.Result.Albums select x).FirstOrDefault(x => x.Id == id);
             var result = AlbumParaAlbumDto(album);
-            //result.BandaId = banda.Id;
+            result.BandaId = new Guid(banda.Id.ToString());
 
             return result;
 
@@ -87,10 +84,10 @@ namespace SpotifyLite.Application.Service
 
             var result = new List<AlbumDTO>();
 
-            //foreach (var item in banda.Albums)
-            //{
-            //    result.Add(AlbumParaAlbumDto(item));
-            //}
+            foreach (var item in banda.Result.Albums)
+            {
+                result.Add(AlbumParaAlbumDto(item));
+            }
 
             return result;
 

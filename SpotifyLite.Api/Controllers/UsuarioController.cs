@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Mvc;
 using SpotifyLite.Application.DTO;
 using SpotifyLite.Application.Service;
 
@@ -49,5 +50,26 @@ namespace SpotifyLite.Api.Controllers
         {
             return Ok(await this.service.Remover(id));
         }
+
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginRequest login)
+        {
+            if (ModelState.IsValid == false)
+                return BadRequest();
+
+            var result = this.service.Autenticar(login.Email, login.Senha);
+
+            if (result == null)
+            {
+                return BadRequest(new
+                {
+                    Error = "email ou senha inválidos"
+                });
+            }
+
+            return Ok(result);
+
+        }
+
     }
 }

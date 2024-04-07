@@ -5,7 +5,7 @@
         public Guid Id { get; set; }
         public string Nome { get; set; }
 
-        public virtual List<Musica> Musica { get; set; } = new List<Musica>();
+        public virtual IList<Musica> Musica { get; set; } = new List<Musica>();
 
 
         public void AdicionarMusica(Musica musica) =>

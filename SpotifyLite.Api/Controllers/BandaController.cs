@@ -16,7 +16,7 @@ namespace SpotifyLite.Api.Controllers
             _bandaService = bandaService;
         }
 
-        [HttpGet]
+        [HttpGet("ListarTodos")]
         public IActionResult GetBandas()
         {
             var result = this._bandaService.Obter();
@@ -24,7 +24,8 @@ namespace SpotifyLite.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        
+        [HttpGet("ObterPorId/{id}")]
         public IActionResult GetBandas(Guid id)
         {
             var result = this._bandaService.Obter(id);
@@ -37,7 +38,7 @@ namespace SpotifyLite.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("Criar")]
         public IActionResult Criar([FromBody] BandaDTO dto)
         {
             if (ModelState is { IsValid: false })
@@ -48,7 +49,7 @@ namespace SpotifyLite.Api.Controllers
             return Created($"/banda/{result.Id}", result);
         }
 
-        [HttpPost("{id}/albums")]
+        [HttpPost("AssociarAlbum/{id}/albums")]
         public IActionResult AssociarAlbum(AlbumDTO dto)
         {
             if (ModelState is { IsValid: false })
@@ -60,8 +61,7 @@ namespace SpotifyLite.Api.Controllers
 
         }
 
-
-        [HttpGet("{idBanda}/albums/{id}")]
+        [HttpGet("ObterAlbumPorId/{idBanda}/albums/{id}")]
         public IActionResult ObterAlbumPorId(Guid idBanda, Guid id)
         {
             var result = this._bandaService.ObterAlbumPorId(idBanda, id);
@@ -73,7 +73,7 @@ namespace SpotifyLite.Api.Controllers
 
         }
 
-        [HttpGet("{idBanda}/albums")]
+        [HttpGet("ListarAlbuns/{idBanda}/albums")]
         public IActionResult ObterAlbuns(Guid idBanda)
         {
             var result = this._bandaService.ObterAlbum(idBanda);
@@ -84,6 +84,5 @@ namespace SpotifyLite.Api.Controllers
             return Ok(result);
 
         }
-
     }
 }

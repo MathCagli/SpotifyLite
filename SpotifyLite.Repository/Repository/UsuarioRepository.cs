@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SpotifyLite.Domain.Models;
 using SpotifyLite.Domain.Models.Conta.Agreggates;
 using SpotifyLite.Domain.Repository;
 using SpotifyLite.Repository.Context;
