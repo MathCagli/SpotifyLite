@@ -83,5 +83,33 @@ namespace SpotifyLite.Api.Controllers
             return Ok(result);
 
         }
+
+        [HttpGet("ListarMusicas/{idUsuario}/albums/{idAlbum}")]
+        public IActionResult ListarMusicas(String idUsuario, String idAlbum)
+        {
+            
+            var result = this.service.ListarMusicas(new Guid(idUsuario), new Guid(idAlbum));
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+
+        }
+
+        // Tabela MusicaPlaylist não há Mapeamento
+        // Como Posso Criar um Favorito?
+        //[HttpPost("FavoritarDesfavoritarMusica/{idMusica}/albums/{idPlaylist}")]
+        //public IActionResult FavoritarDesfavoritarMusica(String idMusica, String idPlaylist)
+        //{
+
+        //    var result = this.service.FavoritarDesfavoritarMusica(new Guid(idMusica), new Guid(idPlaylist));
+
+        //    if (result == null)
+        //        return NotFound();
+
+        //    return Ok(result);
+
+        //}
     }
 }

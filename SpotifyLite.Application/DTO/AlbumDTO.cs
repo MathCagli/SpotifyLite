@@ -25,6 +25,15 @@ namespace SpotifyLite.Application.DTO
         public Guid Id { get; set; }
         public String Nome { get; set; }
         public int Duracao { get; set; }
+    }
+
+    public class MusicaPlaylistDTO
+    {
+        public Guid Id { get; set; }
+        public Guid? IdPlaylist { get; set; }
+        public String Nome { get; set; }
+        public int Duracao { get; set; }
+        public bool Favorito { get; set; }
 
     }
 }

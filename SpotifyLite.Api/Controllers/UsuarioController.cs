@@ -17,13 +17,13 @@ namespace SpotifyLite.Api.Controllers
             this.service = service;
         }
 
-        [HttpPost("Criar")]
-        public async Task<IActionResult> Criar(UsuarioDTO dto)
+        [HttpPost]
+        public IActionResult Criar(UsuarioDTO dto)
         {
             if (ModelState is { IsValid: false })
                 return BadRequest();
 
-            var result = await this.service.Criar(dto);
+            var result = this.service.Criar(dto);
             return Created($"{result.Id}", result);
         }
 

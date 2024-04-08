@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SpotifyLite.Application.DTO;
 using SpotifyLite.Application.Service;
 
 namespace SpotifyLite.Api.Controllers
@@ -15,9 +16,10 @@ namespace SpotifyLite.Api.Controllers
         }
 
         [HttpGet("ListarTodos")]
-        public async Task<IActionResult> ListarTodos()
+        public List<PlanoDTO> ListarTodos()
         {
-            return Ok(await this.service.ListarTodos());
+            var lista = this.service.ListarTodos().Result;
+            return lista;
         }
     }
 }

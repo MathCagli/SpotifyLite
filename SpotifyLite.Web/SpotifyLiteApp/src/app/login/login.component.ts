@@ -39,7 +39,7 @@ export class LoginComponent {
       {
         next: (response) => {
           this.usuario = response;
-          sessionStorage.setItem("user", JSON.stringify(this.usuario));
+          localStorage.setItem("user", this.usuario.id as string);
           this.router.navigate(["/inicio"]);
         },
         error: (e) => {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SpotifyLite.Application.DTO;
+using SpotifyLite.Domain.Models.Conta.Agreggates;
 using SpotifyLite.Domain.Models.Streaming.Agreggates;
 using SpotifyLite.Domain.Repository;
 
@@ -8,11 +9,13 @@ namespace SpotifyLite.Application.Service
     public class BandaService : IBandaService
     {
         private readonly IBandaRepository bandaRepository;
+        private readonly IAlbumRepository albumRepository;
         private readonly IMapper mapper;
 
-        public BandaService(IBandaRepository bandaRepository, IMapper mapper)
+        public BandaService(IBandaRepository bandaRepository, IAlbumRepository albumRepository, IMapper mapper)
         {
             this.bandaRepository = bandaRepository;
+            this.albumRepository = albumRepository;
             this.mapper = mapper;
         }
 
@@ -80,7 +83,7 @@ namespace SpotifyLite.Application.Service
 
         public List<AlbumDTO> ObterAlbum(Guid idBanda)
         {
-            var banda = this.bandaRepository.Get(idBanda);
+            var banda = this.bandaRepository.Get(idBanda).Result;
 
             if (banda == null)
             {
@@ -89,9 +92,31 @@ namespace SpotifyLite.Application.Service
 
             var result = new List<AlbumDTO>();
 
-            foreach (var item in banda.Result.Albums)
+            foreach (var item in banda.Albums)
             {
                 result.Add(AlbumParaAlbumDto(item));
+            }
+
+            return result;
+
+        }
+
+        public List<MusicaPlaylistDTO> ListarMusicas(Guid idUsuario, Guid idAlbum)
+        {
+            List<MusicaPlaylistDTO> result = new List<MusicaPlaylistDTO>();
+            List<Musica> musicas = this.albumRepository.Get(idAlbum).Result.Musica.ToList();
+            foreach (var m in musicas)
+            {
+                Playlist play = m.Playlists.Where(p => p.Usuario.Id == idUsuario).FirstOrDefault();
+                MusicaPlaylistDTO i = new MusicaPlaylistDTO()
+                {
+                    Id = m.Id,
+                    IdPlaylist = play != null ? play.Id : null,
+                    Nome = m.Nome,
+                    Duracao = m.Duracao,
+                    Favorito = play != null ? true : false
+                };
+                result.Add(i);
             }
 
             return result;

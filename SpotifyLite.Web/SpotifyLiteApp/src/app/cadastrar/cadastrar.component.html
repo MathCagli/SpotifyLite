@@ -1,27 +1,55 @@
-<div class="example-container" style="display: flex; justify-content: center;">
-  <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
-  <mat-card style="width: 90%; height: 90%;" class="mat-elevation-z4">
+<div style="padding: 10px;">
+  <mat-card style="width: 50%; height: 90%;" class="mat-elevation-z4">
+    <h1>Cadastrar Novo Usuário</h1>
+    <h3>Dados do Usuário</h3>
+    <mat-form-field>
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="Informe seu nome" [formControl]="nome" required>
+      <mat-error *ngIf="email.invalid">Nome inválido</mat-error>
+    </mat-form-field>
+    <br />
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput
-             placeholder="Informe a email..."
-             [formControl]="email"
-             required>
-      <mat-error *ngIf="email.invalid">Email inválido</mat-error>
+      <input matInput type="email" placeholder="Informe seu email" [formControl]="email" required>
+      <mat-error *ngIf="senha.invalid">Email inválida</mat-error>
     </mat-form-field>
     <br />
     <mat-form-field>
-        <mat-label>Senha</mat-label>
-        <input matInput
-               type="password"
-               placeholder="Informe a senha..."
-               [formControl]="senha"
-               required>
-        <mat-error *ngIf="senha.invalid">Senha inválida</mat-error>        
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" placeholder="Informe sua senha" [formControl]="senha" required>
+      <mat-error *ngIf="senha.invalid">Senha inválido</mat-error>
     </mat-form-field>
     <br />
-    <button mat-raised-button color="primary" (click)="login();">Login</button>
+    <mat-form-field>
+      <mat-label>Data de Nascimento</mat-label>
+      <input matInput [matDatepicker]="picker" [formControl]="dataNascimento">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
     <br />
-    <button mat-raised-button color="secundary" (click)="cadastrar();">Cadastrar</button>
+    <h3>Plano</h3>
+    <mat-form-field>
+      <mat-label>Plano</mat-label>
+      <mat-select [formControl]="planoId">
+        <mat-option *ngFor="let p of listaPlanos" [value]=p.id>
+          {{p.nome}} - {{p.valor}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br />
+    <h3>Dados do Cartão</h3>
+    <mat-form-field>
+      <mat-label>Limite</mat-label>
+      <input matInput type="number" placeholder="Informe o limite do cartão" [formControl]="limite" required>
+      <mat-error *ngIf="limite.invalid">Limite inválido</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Número</mat-label>
+      <input matInput placeholder="Informe o número do cartão" [formControl]="numero" required>
+      <mat-error *ngIf="numero.invalid">Número inválido</mat-error>
+    </mat-form-field>
+    <br />
+    <button mat-raised-button color="primary" (click)="cadastrar();">Cadastrar</button>
   </mat-card>
 </div>

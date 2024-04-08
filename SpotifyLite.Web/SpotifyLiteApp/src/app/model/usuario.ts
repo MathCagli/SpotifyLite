@@ -1,6 +1,11 @@
+import { Cartao } from "./cartao";
+
 export interface Usuario {
     id?:String;
     nome?:String;
     email?:String;
-    dtNascimento?:String;
+    senha?:String;
+    dataNascimento?:String;
+    planoId?:String;
+    cartao?:Cartao;
 }

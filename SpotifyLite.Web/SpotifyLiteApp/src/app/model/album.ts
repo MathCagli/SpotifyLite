@@ -6,6 +6,8 @@ export interface Album {
 
 export interface Musica {
     id?:string;
+    idPlaylist?:string;
     nome?:string;
     duracao?:string;
+    favorito?:boolean;
 }

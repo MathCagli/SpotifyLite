@@ -24,10 +24,12 @@ namespace SpotifyLite.Api
 
             // Services
             builder.Services.AddScoped<IBandaService, BandaService>();
+            builder.Services.AddScoped<IPlanoService, PlanoService>();
             builder.Services.AddScoped<IPlaylistService, PlaylistService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
             // Repositories
+            builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
             builder.Services.AddScoped<IBandaRepository, BandaRepository>();
             builder.Services.AddScoped<IPlanoRepository, PlanoRepository>();
             builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();

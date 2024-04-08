@@ -28,6 +28,6 @@ export class InicioComponent implements OnInit {
   }
 
   public verDetalhe(item:Banda) {
-    this.router.navigate(["detalhe", item.id]);
+    this.router.navigate(["detalheBanda", item.id]);
   }
 }

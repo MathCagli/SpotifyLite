@@ -13,6 +13,9 @@ namespace SpotifyLite.Application.Profile
             // Banda
             CreateMap<Banda, BandaDTO>().ReverseMap();
 
+            // Plano
+            CreateMap<Plano, PlanoDTO>().ReverseMap();
+
             // Playlist
             CreateMap<Playlist, PlaylistDTO>().ReverseMap();
 
